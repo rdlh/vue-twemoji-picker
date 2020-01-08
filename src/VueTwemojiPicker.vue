@@ -216,7 +216,7 @@ export default {
         this.recentEmojis.splice(emojiIndex, 1)
       }
 
-      if (this.recentEmojis.length >= this.maxRecentEmojiLines * 3) {
+      if (this.recentEmojis.length >= this.maxRecentEmojiLines * 9) {
         this.recentEmojis.pop()
       }
 
@@ -241,7 +241,7 @@ export default {
       this.currentCategory = scrolledToCategory
     },
     categoryOffset (category) {
-      return category == 'recent' ? 0 : this.$refs[category][0].offsetTop - 96
+      return category == 'recent' ? 0 : this.$refs[category][0].offsetTop - this.$refs['recent'].offsetTop
     }
   },
   destroyed () {
@@ -261,6 +261,12 @@ export default {
   padding: 6px;
   border: 1px #e6ecf5 solid;
   border-radius: 6px;
+  box-sizing: content-box;
+  background-color: #fff;
+}
+
+.vue-twemoji-picker * {
+  box-sizing: content-box;
 }
 
 .vue-twemoji-picker__categories {
@@ -286,6 +292,7 @@ export default {
   padding: 12px 6px;
   font-weight: bold;
   color: #7f8fa4;
+  font-size: 15px;
 }
 
 .vue-twemoji-picker__emoji {
@@ -295,6 +302,7 @@ export default {
   padding: 6px;
   border-radius: 6px;
   cursor: pointer;
+  box-sizing: content-box;
 }
 
 .vue-twemoji-picker__emoji div {
@@ -324,5 +332,7 @@ export default {
   outline: none;
   color: #7f8fa4;
   line-height: 14px;
+  font-size: 11px;
+  box-sizing: content-box;
 }
 </style>
