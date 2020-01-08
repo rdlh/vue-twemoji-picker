@@ -111,7 +111,8 @@ export default {
     }
   },
   created () {
-    this.categories = Object.assign(this.realCategoryNames, this.categoryNames)
+    this.categories = Object.assign({}, this.realCategoryNames)
+    Object.assign(this.categories, this.categoryNames)
 
     this.emojiList = fullEmojiList
 
