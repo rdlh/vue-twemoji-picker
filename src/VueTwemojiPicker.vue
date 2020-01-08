@@ -28,7 +28,7 @@
     </div>
     <div :ref="'emojis'" class="vue-twemoji-picker__emojis">
       <!-- Recent emojis -->
-      <div id="recent" ref="recent" v-if="filteredRecentEmojis.length > 0">
+      <div id="recent" ref="recent" v-show="filteredRecentEmojis.length > 0">
         <div class="vue-twemoji-picker__category_title">{{ recent }}</div>
         <div @click="selectEmoji(emoji)" v-for="emoji in filteredRecentEmojis" v-bind:key="`recent-${emoji.short_name}`" class="vue-twemoji-picker__emoji">
           <div :style="emojiStyle(emoji)"></div>
