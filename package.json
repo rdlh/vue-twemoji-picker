@@ -1,17 +1,31 @@
 {
   "name": "vue-twemoji-picker",
   "version": "0.1.0",
+  "author": "Rémi Delhaye <contact@rdlh.io>",
+  "homepage": "https://github.com/rdlh/vue-twemoji-picker",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-twemoji-picker.umd.js",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es --file dist/vue-twemoji-picker.esm.js",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife --file dist/vue-twemoji-picker.min.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "emoji-datasource-twitter": "4.1.0"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
+    "minimist": "^1.2.0",
+    "rollup": "^1.14.4",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify-es": "0.0.1",
+    "rollup-plugin-vue": "^4.7.2",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
