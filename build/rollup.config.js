@@ -11,10 +11,15 @@ const config = {
   input: "src/main.js",
   output: {
     name: "VueTwemojiPicker",
-    exports: "named"
+    exports: "named",
+    globals: {
+      'emoji-datasource-twitter/emoji.json': 'fullEmojiList',
+      'emoji-datasource-twitter/img/twitter/sheets/64.png': 'emojiSprite'
+    }
   },
   external: [
-    'emoji-datasource-twitter'
+    'emoji-datasource-twitter/emoji.json',
+    'emoji-datasource-twitter/img/twitter/sheets/64.png'
   ],
   plugins: [
     replace({
