@@ -1,6 +1,6 @@
 {
   "name": "vue-twemoji-picker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Rémi Delhaye <contact@rdlh.io>",
   "homepage": "https://github.com/rdlh/vue-twemoji-picker",
   "main": "src/main.js",
