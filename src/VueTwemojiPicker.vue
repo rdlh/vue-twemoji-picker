@@ -24,7 +24,7 @@
       </div>
     </div>
     <div>
-      <input class="vue-twemoji-picker__search" v-model="search" :placeholder="placeholder">
+      <input :ref="'search'" class="vue-twemoji-picker__search" v-model="search" :placeholder="placeholder">
     </div>
     <div :ref="'emojis'" class="vue-twemoji-picker__emojis">
       <!-- Recent emojis -->
@@ -108,6 +108,9 @@ export default {
     },
     maxRecentEmojiLines: {
       default: 3
+    },
+    focusInput: {
+      default: true
     }
   },
   created () {
@@ -144,6 +147,9 @@ export default {
   },
   mounted () {
     this.$refs.emojis.addEventListener('scroll', this.handleScroll)
+    if (this.focusInput) {
+      this.$refs.search.focus()
+    }
   },
   computed: {
     filteredEmojis () {
