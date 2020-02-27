@@ -319,7 +319,7 @@ export default {
   height: 22px;
   display: inline-block;
   background-size: 5700% 5700%;
-  background-image: url('~@/assets/emojis.png')
+  background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/sheets-clean/32.png')
 }
 
 .vue-twemoji-picker__emoji:hover, .vue-twemoji-picker__category__current {

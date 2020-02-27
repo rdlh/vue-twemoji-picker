@@ -1,6 +1,6 @@
 {
   "name": "vue-twemoji-picker",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "author": "Rémi Delhaye <contact@rdlh.io>",
   "homepage": "https://github.com/rdlh/vue-twemoji-picker",
   "main": "src/main.js",
@@ -16,7 +16,8 @@
   "dependencies": {
     "core-js": "^3.4.3",
     "vue": "^2.6.10",
-    "emoji-datasource-twitter": "4.1.0"
+    "emoji-datasource-twitter": "4.1.0",
+    "smoothscroll-polyfill": "0.4.4"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.0.2",
@@ -34,7 +35,6 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-uglify-es": "0.0.1",
     "rollup-plugin-vue": "^4.7.2",
-    "smoothscroll-polyfill": "0.4.4",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

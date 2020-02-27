@@ -23,17 +23,8 @@ data_hash.each do |emoji|
     x: emoji['sheet_x'],
     y: emoji['sheet_y'],
     order: emoji['sort_order'],
+    image: emoji['image']
   } if emoji['has_img_twitter']
 end
 
 File.open('src/emojis.json', 'w') { |file| file.puts JSON.generate(new_hash) }
-
-url =
-uri = URI(url)
-response = Net::HTTP.get(uri)
-
-open('https://github.com/iamcal/emoji-data/blob/master/sheet_twitter_32.png?raw=true') {|f|
-  File.open('src/assets/emojis.png',"wb") do |file|
-    file.puts f.read
-  end
-}
