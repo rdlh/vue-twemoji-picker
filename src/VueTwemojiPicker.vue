@@ -49,8 +49,7 @@
 <script>
 /* eslint-disable vue/no-side-effects-in-computed-properties */
 
-import fullEmojiList from 'emoji-datasource-twitter/emoji.json'
-import emojiSprite from 'emoji-datasource-twitter/img/twitter/sheets/64.png'
+import fullEmojiList from './emojis.json'
 
 export default {
   data () {
@@ -119,7 +118,7 @@ export default {
 
     this.emojiList = fullEmojiList
 
-    let lsRecentEmojis = window.localStorage.getItem('vue-twemoji-picker-recents')
+    let lsRecentEmojis = window.localStorage.getItem('vue-twemoji-picker-recent-emojis')
 
     if (lsRecentEmojis) {
       this.currentCategory = 'recent'
@@ -135,7 +134,7 @@ export default {
     }
 
     this.emojisByCategories = this.emojiList
-      .sort((b, a) => b.sort_order - a.sort_order)
+      .sort((b, a) => b.order - a.order)
       .reduce((result, emoji) => {
         if (Object.values(this.realCategoryNames).indexOf(emoji.category) != -1) {
           let category = Object.keys(this.realCategoryNames).find( k => this.realCategoryNames[k] == emoji.category )
@@ -166,7 +165,7 @@ export default {
 
       Object.keys(this.emojisByCategories).forEach((category) => {
         let filteredEmojis = this.emojisByCategories[category].filter(emoji => {
-          return emoji.has_img_twitter && emoji.short_names.find((shortName) => shortName.replace('_', '').match(this.search))
+          return emoji.short_names.find((shortName) => shortName.replace('_', '').match(this.search))
         })
 
         if (filteredEmojis.length > 0) {
@@ -190,7 +189,7 @@ export default {
   },
   watch: {
     recentEmojis() {
-      window.localStorage.setItem('vue-twemoji-picker-recents', JSON.stringify(this.recentEmojis))
+      window.localStorage.setItem('vue-twemoji-picker-recent-emojis', JSON.stringify(this.recentEmojis))
     }
   },
   methods: {
@@ -209,15 +208,14 @@ export default {
     emojiStyle (emoji) {
       if (emoji) {
         return {
-          'background-image': `url(${emojiSprite})`,
-          'background-position': `calc(${emoji.sheet_x} * 100% / 51) calc(${emoji.sheet_y} * 100% / 51)`
+          'background-position': `calc(${emoji.x} * 100% / 56) calc(${emoji.y} * 100% / 56)`
         }
       }
     },
     selectEmoji (emoji) {
       this.$emit('pick', emoji)
 
-      let emojiIndex = this.recentEmojis.findIndex(recentEmoji => recentEmoji.name == emoji.name)
+      let emojiIndex = this.recentEmojis.findIndex(recentEmoji => recentEmoji.short_name == emoji.short_name)
 
       if (emojiIndex >= 0) {
         this.recentEmojis.splice(emojiIndex, 1)
@@ -248,7 +246,8 @@ export default {
       this.currentCategory = scrolledToCategory
     },
     categoryOffset (category) {
-      return category == 'recent' ? 0 : this.$refs[category][0].offsetTop - this.$refs['recent'].offsetTop
+      let recentOffset = this.$refs['recent'].offsetTop
+      return category == 'recent' ? 0 : this.$refs[category][0].offsetTop - (recentOffset == 0 ? 90 : recentOffset)
     }
   },
   destroyed () {
@@ -277,7 +276,7 @@ export default {
 }
 
 .vue-twemoji-picker__categories {
-  display: flex;
+  display: -webkit-inline-box;
   margin: 0 -6px 0px -6px;
   padding: 0 6px 6px 6px;
   border-bottom: 1px #e6ecf5 solid;
@@ -316,7 +315,8 @@ export default {
   width: 22px;
   height: 22px;
   display: inline-block;
-  background-size: 5200% 5200%;
+  background-size: 5700% 5700%;
+  background-image: url('~@/assets/emojis.png')
 }
 
 .vue-twemoji-picker__emoji:hover, .vue-twemoji-picker__category__current {

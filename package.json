@@ -1,10 +1,11 @@
 {
   "name": "vue-twemoji-picker",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Rémi Delhaye <contact@rdlh.io>",
   "homepage": "https://github.com/rdlh/vue-twemoji-picker",
   "main": "src/main.js",
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
     "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-twemoji-picker.umd.js",
@@ -32,7 +33,8 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "smoothscroll-polyfill": "0.4.4"
   },
   "eslintConfig": {
     "root": true,
