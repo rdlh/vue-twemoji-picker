@@ -50,6 +50,7 @@
 /* eslint-disable vue/no-side-effects-in-computed-properties */
 
 import fullEmojiList from './emojis.json'
+import smoothscroll from 'smoothscroll-polyfill';
 
 export default {
   data () {
@@ -113,6 +114,8 @@ export default {
     }
   },
   created () {
+    smoothscroll.polyfill();
+
     this.categories = Object.assign({}, this.realCategoryNames)
     Object.assign(this.categories, this.categoryNames)
 
